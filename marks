@@ -1,0 +1,43 @@
+package marks_;
+abstract class Marks_ {
+    abstract double getPercentage();
+}
+class A extends Marks_ {
+    double m1;
+    double m2;
+    double m3;
+
+    public A(double m1,double m2,double m3) {
+        this.m1=m1;
+        this.m2=m2;
+        this.m3=m3;
+    }
+
+    double getPercentage() {
+        return ((m1+m2+m3)/300)*100;
+    }
+}
+class B extends Marks_ {
+    double m1;
+    double m2;
+    double m3;
+    double m4;
+
+    public B(double m1,double m2,double m3,double m4) {
+        this.m1=m1;
+        this.m2=m2;
+        this.m3=m3;
+        this.m4=m4;
+    }
+    double getPercentage() {
+        return ((m1+m2+m3+m4)/400)*100;
+    }
+}
+public class Main_ {
+    public static void main(String args[]) {
+        Marks obj1= new A(92,99,95);
+        Marks obj2=new B(81,92,98,95);
+        System.out.println("Percentage of marks for student A: "+obj1.getPercentage() + "%");
+        System.out.println("Percentage of marks for student B: "+obj2.getPercentage() + "%");
+    }
+}
