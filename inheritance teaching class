@@ -1,0 +1,60 @@
+Employees.java
+public class Employees {
+    private String name;
+    private int id;
+    private double salary;
+    public Employees(String name, int id, double salary) {
+        this.name = name;
+        this.id = id;
+        this.salary = salary;
+    }
+    public void getValue() {
+        System.out.println("Employee ID: " + id);
+        System.out.println("Employee Name: " + name);
+        System.out.println("Employee Salary: $" + salary);
+    }
+}
+Teaching.java
+class Teaching extends Employees {
+    private String designation;
+    public Teaching(String name, int id, double salary, String designation) {
+        super(name, id, salary);
+        this.designation = designation;
+    }
+    public void setValue(String newdesignation) {
+        this.designation = newdesignation;
+    }
+
+    public void getValue() {
+        super.getValue();
+        System.out.println("Teaching Department: " + designation);
+    }
+}
+NonTeaching.java
+class NonTeaching extends Employees {
+    private String designation;
+    public NonTeaching(String name, int id, double salary, String designation) {
+        super(name, id, salary);
+        this.designation = designation;
+    }
+    public void setValue(String newdesignation) {
+        this.designation = newdesignation;
+    }
+    public void getValue() {
+        super.getValue();
+        System.out.println("Non-Teaching Role: " + designation);
+    }
+}
+Main.java
+public class Main {
+    public static void main(String[] args) {
+        Teaching teaching = new Teaching("William", 101, 50000, "Assistant Professor");
+        NonTeaching nonTeaching = new NonTeaching("Smith", 102, 35000, "Admin");
+        System.out.println("Teaching Staff:");
+        teaching.setValue("Associate Professor");
+        teaching.getValue();
+        System.out.println("\nNon-Teaching Staff:");
+        nonTeaching.setValue("HR");
+        nonTeaching.getValue();
+    }
+}
