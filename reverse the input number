@@ -1,0 +1,29 @@
+import java.util.Scanner;
+public class NumberReverser {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = scanner.nextInt();
+        int rev = reverseNumberUsingForLoop(number);
+        System.out.println("Reversed number using for loop: " + rev);
+        int rev1 = reverseNumberUsingWhileLoop(number);
+        System.out.println("Reversed number using while loop: " + rev1);
+    }
+    public static int reverseNumberUsingForLoop(int number) {
+        int reversedNumber = 0;
+        for (; number != 0; number /= 10) {
+            int digit = number % 10;
+            reversedNumber = reversedNumber * 10 + digit;
+        }
+        return reversedNumber;
+    }
+    public static int reverseNumberUsingWhileLoop(int number) {
+        int reversedNumber = 0;
+        while (number != 0) {
+            int digit = number % 10;
+            reversedNumber = reversedNumber * 10 + digit;
+            number /= 10;
+        }
+        return reversedNumber;
+    }
+}
