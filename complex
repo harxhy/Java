@@ -1,0 +1,57 @@
+public class MyComplex {
+    private double real;
+    private double imaginary;
+    public MyComplex(double real, double imaginary) {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+    public double getReal() {
+        return real;
+    }
+    public double getImaginary() {
+        return imaginary;
+    }
+    public void setReal(double real) {
+        this.real = real;
+    }
+    public void setImaginary(double imaginary) {
+        this.imaginary = imaginary;
+    }
+    public void add(MyComplex other) {
+        this.real += other.real;
+        this.imaginary += other.imaginary;
+    }
+    public void subtract(MyComplex other) {
+        this.real -= other.real;
+        this.imaginary -= other.imaginary;
+    }
+    public void multiply(MyComplex other) {
+        double newReal = this.real * other.real - this.imaginary * other.imaginary;
+        double newImaginary = this.real * other.imaginary + this.imaginary * other.real;
+        this.real = newReal;
+        this.imaginary = newImaginary;
+    }
+// Helper method to display complex numbers
+    public void printComplexNumber() {
+        System.out.println(this.real + " + " + this.imaginary + "i");
+    }
+    public static void main(String[] args) {
+// Creating two complex numbers
+        MyComplex complex1 = new MyComplex(2.0, 3.0);
+        MyComplex complex2 = new MyComplex(1.0, -1.5);
+// Performing arithmetic operations on complex numbers
+        System.out.println("Complex Number 1: ");
+        complex1.printComplexNumber();
+        System.out.println("Complex Number 2: ");
+        complex2.printComplexNumber();
+        complex1.add(complex2);
+        System.out.println("Addition: ");
+        complex1.printComplexNumber();
+        complex1.subtract(complex2);
+        System.out.println("Subtraction: ");
+        complex1.printComplexNumber();
+        complex1.multiply(complex2);
+        System.out.println("Multiplication: ");
+        complex1.printComplexNumber();
+    }
+}
