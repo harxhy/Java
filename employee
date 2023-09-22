@@ -1,0 +1,53 @@
+class Employee {
+    String firstName;
+    String lastName;
+    double monthlySalary;
+// Constructor
+    public Employee(String firstName, String lastName, double monthlySalary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        if (monthlySalary > 0) {
+            this.monthlySalary = monthlySalary;
+        }
+    }
+// Method to set info
+    public void setInfo(double salary, double hoursPerDay) {
+// Calculate monthly salary based on hours worked per day
+        this.monthlySalary = salary * hoursPerDay * 30; // Assuming 30 working days in a month
+    }
+// Method to get info
+    public String getInfo() {
+        return "Employee: " + firstName + " " + lastName + ", Monthly Salary: $" + monthlySalary;
+    }
+// Method to calculate and return yearly salary
+    public double getYearlySalary() {
+        return monthlySalary * 12;
+    }
+// Method to give a 10% raise
+    public void giveRaise() {
+        monthlySalary += monthlySalary*0.1;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Employee emp1 = new Employee("John", "Doe", 0);
+        Employee emp2 = new Employee("Jane", "Smith", 0);
+
+        emp1.setInfo(100,8);
+        emp2.setInfo(200,8);
+
+        System.out.println(emp1.getInfo());
+        System.out.println(emp2.getInfo());
+
+// Display yearly salary for both employees
+        System.out.println("Yearly Salary:");
+        System.out.println("Employee 1: $" + emp1.getYearlySalary());
+        System.out.println("Employee 2: $" + emp2.getYearlySalary());
+// Giving a 10% raise to both employees
+        emp1.giveRaise();
+        emp2.giveRaise();
+        System.out.println("Yearly Salary After 10% Raise:");
+        System.out.println("Employee 1: $" + emp1.getYearlySalary());
+        System.out.println("Employee 2: $" + emp2.getYearlySalary());
+    }
+}
