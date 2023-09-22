@@ -1,0 +1,29 @@
+public class Compareto {
+    public static void main(String[] args) {
+        String str1 = "Mango";
+        String str2 = "Bananas";
+
+        int result = customCompareTo(str1, str2);
+        if (result < 0) {
+            System.out.println(str1 + " comes before " + str2);
+        } else if (result > 0) {
+            System.out.println(str1 + " comes after " + str2);
+        } else {
+            System.out.println(str1 + " is equal to " + str2);
+        }
+    }
+    public static int customCompareTo(String str1, String str2) {
+        int len1 = str1.length();
+        int len2 = str2.length();
+        int minLength = Math.min(len1, len2);
+
+        for (int i = 0; i < minLength; i++) {
+            int diff = str1.charAt(i) - str2.charAt(i);
+            if (diff != 0) {
+                return diff;
+            }
+        }
+
+        return len1 - len2;
+    }
+}
