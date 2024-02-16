@@ -1,47 +1,40 @@
-import sys
+class Router:
+    def __init__(self, num_nodes):
+        self.num_nodes = num_nodes
+        self.distances = [[float('inf')] * num_nodes for _ in range(num_nodes)]
+        self.next_hop = [[None] * num_nodes for _ in range(num_nodes)]
 
-def generate_routing_tables(adjacency_matrix):
-    num_nodes = len(adjacency_matrix)
+    def initialize_routing_table(self, cost_matrix):
+        for i in range(self.num_nodes):
+            for j in range(self.num_nodes):
+                self.distances[i][j] = cost_matrix[i][j]
+                self.next_hop[i][j] = j
 
-    # Initialize routing tables
-    routing_tables = []
-    for node in range(num_nodes):
-        routing_table = []
-        for destination in range(num_nodes):
-            cost, outgoing_line = sys.maxsize, -1
+    def update_routing_table(self):
+        for _ in range(self.num_nodes):
+            for i in range(self.num_nodes):
+                for j in range(self.num_nodes):
+                    for k in range(self.num_nodes):
+                        if self.distances[i][j] > self.distances[i][k] + self.distances[k][j]:
+                            self.distances[i][j] = self.distances[i][k] + self.distances[k][j]
+                            self.next_hop[i][j] = k
 
-            if node == destination:
-                cost = 0
-            elif adjacency_matrix[node][destination] != 0:
-                cost = adjacency_matrix[node][destination]
-                outgoing_line = destination
+    def print_routing_table(self):
+        print("Routing Table:")
+        for i in range(self.num_nodes):
+            print(f"Router {i} ->")
+            for j in range(self.num_nodes):
+                print(f"  To Router {j}: Distance = {self.distances[i][j]}, Next Hop = {self.next_hop[i][j]}")
 
-            routing_table.append((cost, outgoing_line))
+if __name__ == "__main__":
+    num_nodes = int(input("Enter the number of routers: "))  # Get the number of nodes from the user
+    cost_matrix = []
+    print("Enter the cost matrix (space-separated values):")
+    for _ in range(num_nodes):
+        row = list(map(float, input().split()))
+        cost_matrix.append(row)
 
-        routing_tables.append(routing_table)
-
-    return routing_tables
-
-def print_routing_tables(routing_tables):
-    num_nodes = len(routing_tables)
-
-    for node in range(num_nodes):
-        print(f"\nRouting Table for Node {node + 1}:\n{'Destination':<15}{'Cost':<10}{'Outgoing Line':<15}")
-
-        for destination in range(num_nodes):
-            cost, outgoing_line = routing_tables[node][destination]
-            print(f"{destination + 1:<15}{cost:<10}{outgoing_line + 1:<15}")
-
-if __name__== "__main__":
-    # Get user input for the number of nodes and adjacency matrix
-    num_nodes = int(input("Enter the number of nodes in the network: "))
-
-    adjacency_matrix = []
-    print("Enter the adjacency matrix:")
-    for i in range(num_nodes):
-        row = list(map(int, input().split()))
-        adjacency_matrix.append(row)
-
-    # Generate and print routing tables
-    routing_tables = generate_routing_tables(adjacency_matrix)
-    print_routing_tables(routing_tables)
+    router = Router(num_nodes)
+    router.initialize_routing_table(cost_matrix)
+    router.update_routing_table()
+    router.print_routing_table()
